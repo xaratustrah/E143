@@ -64,7 +64,7 @@ def copy_files_to_wwwpath(filename, wwwpath):
     """
     copy the data on the mounted filesystem
     """
-
+    print('Copying files...')
     shutil.copy(filename, wwwpath)
     shutil.copy(filename + '.root', wwwpath)
     shutil.copy(filename + '.png', wwwpath)
