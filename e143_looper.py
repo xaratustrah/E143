@@ -38,6 +38,10 @@ def process_each(filename):
     copy_files_to_wwwpath()
 
 
+def copy_files_to_wwwpath():
+    pass
+
+
 def get_root_file(filename):
     pass
 
