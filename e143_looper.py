@@ -117,7 +117,7 @@ def has_handle(fpath):
                 pass
         return False
     else:
-        pass
+        return False
 
 
 def main():
