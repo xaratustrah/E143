@@ -105,13 +105,18 @@ def already_processed(currentfilename, logfilename):
 
 def finished_copying(filename):
     print('Checking whether file is open...')
-    s1 = os.path.getsize(filename)
-    time.sleep(2)
-    s2 = os.path.getsize(filename)
-    if s1 == s2:
-        return True
-    else:
-        return False
+    is_finished = False
+    try:
+        s1 = os.path.getsize(filename)
+        time.sleep(2)
+        s2 = os.path.getsize(filename)
+        if s1 == s2:
+            is_finished = True
+        else:
+            is_finished = False
+    except OSError:
+        is_finished = False
+    return is_finished
 
 
 def has_handle(fpath):
