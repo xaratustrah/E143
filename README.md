@@ -48,10 +48,10 @@ and there is one mandatory command line argument which is the files to analyse. 
 
 then you can chose a wildcard at the proper place
 
-    E143-410MHz_-2021.04.* --> all month
-    E143-410MHz_-2021.04.30.* --> all day
-    E143-410MHz_-2021.04.30.20.* --> all hour
-    E143-410MHz_-2021.04.30.20.03.* --> all minute
+    E143-410MHz_-2021.04.* --> all files within that month
+    E143-410MHz_-2021.04.30.* --> all files within that day
+    E143-410MHz_-2021.04.30.20.* --> all files within that hour
+    E143-410MHz_-2021.04.30.20.03.* --> all files within that minute
 
 and so on. Of course other combinations are possible, or you can just list files on the command line. E.g. running:
 
