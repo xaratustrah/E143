@@ -35,9 +35,9 @@ def process_loop(filenames_list, analysis_time):
         print('Plotting into a png file...')
         result_filename = datetime.datetime.now().strftime('%Y.%m.%d.%H.%M.%S')
         plot_spectrum(ff, pp, cen=iq.center,
-                      filename=filename, dbm=True, title=result_filename)
+                      filename=result_filename, dbm=True, title=result_filename)
         print('Creating a root file...')
-        write_spectrum_to_root(ff, pp, filename=filename,
+        write_spectrum_to_root(ff, pp, filename=result_filename,
                                center=iq.center, title=result_filename)
 
     except KeyboardInterrupt:
