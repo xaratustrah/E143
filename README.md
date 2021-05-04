@@ -55,7 +55,7 @@ then you can chose a wildcard at the proper place
 
 and so on. Of course other combinations are possible, or you can just list files on the command line. E.g. running:
 
-    python /home/myuser/git/e143-scripts/e143_looper.py -t 0.5 E143-410MHz_-2021.04.30.20.*
+    python /home/myuser/git/e143-scripts/e143_analyzer.py -t 0.5 E143-410MHz_-2021.04.30.20.*
 
 will process all files from the last hour, only considering their first 500 ms worth of data.
 
