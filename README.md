@@ -4,15 +4,17 @@ This is the repository for the scripts during the run of the E143 experiment: Se
 
 ### Dependencies
 
-These scripts depend on the [IQTools]() library. So please follow the installation instructions [there](https://github.com/xaratustrah/iqtools#install--uninstall).
+These scripts need Python-3 (Python 2 is not supported) and depend on the [IQTools]() library. So please follow the installation instructions [there](https://github.com/xaratustrah/iqtools#install--uninstall).
 
-Important note: please always refresh your local installation of the *IQTools* library, since I often make small changes. You can do this by using:
+Important note: please always refresh your local installation of the *IQTools* library, since I often make small changes to both library and the scripts. You can do this by using:
 
     git pull && python setup.py install --record files.txt
 
-as mentioned above in the installation link.
+and again here on the scripts repository:
 
-For command line *git* under windows you can check [GIT for Windows](https://gitforwindows.org/).
+    git pull
+
+to keep things updated. If you don't have *git* you can install it for command line under windows from [GIT for Windows](https://gitforwindows.org/). If you don't have access to *git* at all, you can download the ZIP file from GitHUB and unpack it manually.
 
 
 ## e143_looper.py
