@@ -30,7 +30,8 @@ def process_loop(directory, wwwpath, logfilename):
         if file.lower().endswith('.tiq'):
             fullfilename = os.path.join(directory, file)
             if not already_processed(fullfilename, logfilename):
-                if not has_handle(fullfilename):
+                # if not has_handle(fullfilename):
+                if finished_copying(fullfilename):
                     process_each(fullfilename)
                     put_into_logfile(fullfilename, logfilename)
                     copy_files_to_wwwpath(fullfilename, wwwpath)
@@ -100,6 +101,17 @@ def already_processed(currentfilename, logfilename):
         print('Log file does not exist, creating a new one.')
 
     return already_processed
+
+
+def finished_copying(filename):
+    print('Checking whether file is open...')
+    s1 = os.path.getsize(filename)
+    time.sleep(2)
+    s2 = os.path.getsize(filename)
+    if s1 == s2:
+        return True
+    else:
+        return False
 
 
 def has_handle(fpath):

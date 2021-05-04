@@ -12,6 +12,9 @@ Important note: please always refresh your local installation of the *IQTools* l
 
 as mentioned above in the installation link.
 
+For command line *git* under windows you can check [GIT for Windows](https://gitforwindows.org/).
+
+
 ## e143_looper.py
 
 This script will run on the server, monitor a directory and process them as the files come in. The processing contains the conversion to ROOT files, making an spectrogram in a PNG file, and then copy all files to a (remote) directory. Parameters are:
