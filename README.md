@@ -60,4 +60,7 @@ and so on. Of course other combinations are possible, or you can just list files
 will process all files from the last hour, only considering their first 500 ms worth of data.
 
 #### Structure of ROOT files
-Unlike the other script, the ROOT files created by this script does not contain a tree with time data, but a 1D-histogram that already contains the spectrum data.
+Unlike the other script, the ROOT files created by this script does not contain a tree with time data, but a 1D-histogram that already contains the spectrum data. The data inside the histogram is in linear scale (not log nor dBm).
+
+#### Structure of PNG files
+The PNG files are plotted in dBm scale for better visibility.
