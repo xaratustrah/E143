@@ -32,7 +32,7 @@ When calling on the shell, large paths can also be put inside quotation marks ""
 
 #### Structure of ROOT files
 
-The structure of the root files is like this: there are two trees inside, one tree has only one branch with an integer in it, which is the sampling rate. the other tree also has a branch in it, which contains the time series, which correspond to the power of the signal, meaning sqrt(I^2+Q^2). The distance between the time samples is 1/(sampling_rate).
+The structure of the root files is like this: there are two trees inside, one tree has only one branch with an integer in it, which is the sampling rate. the other tree also has a branch in it, which contains the time series, which correspond to the power of the signal, meaning (I^2+Q^2). The distance between the time samples is 1/(sampling_rate).
 
 Inside ROOT you can just read the tree and after making FFT plot them on a histogram, or you can create a 2D histogram if needed.
 
