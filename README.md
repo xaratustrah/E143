@@ -6,11 +6,11 @@ This is the repository for the scripts during the run of the E143 experiment: Se
 
 These scripts depend on the [IQTools]() library. So please follow the installation instructions [there](https://github.com/xaratustrah/iqtools#install--uninstall).
 
-Important note: please always refresh your local installation of the IQTools library, since I often make small changes. You can do this by using:
+Important note: please always refresh your local installation of the *IQTools* library, since I often make small changes. You can do this by using:
 
-    git pull
+    git pull && python setup.py install --record files.txt
 
-and then go through the setup as mentioned above.
+as mentioned above in the installation link.
 
 ## e143_looper.py
 
@@ -40,6 +40,7 @@ For more info on ROOT please check the official [CERN ROOT web site](https://roo
 This script can run on any computer with the raw data on it and will be run manually. It traverses through many files, reads an amount of data corresponding to a certain amount of time, makes a 1D-spectrum, adds them up, then makes a PNG plot as well as 1D-ROOT file. Parameters are:
 
 * `-t` amount of time to read from the file in seconds. This should not exceed the file's total length of course, otherwise the script will give a warning and exit.
+* `-o` The name of the output file for PNG and ROOT files. If not provided, the current time and date will be chosen.
 
 and there is one mandatory command line argument which is the files to analyse. Here you can use the shell wildcard to provide as many as you wish. Since most data have a time stamp, you can provide a wildcard at the proper place, i.e. if your filenames are like:
 
@@ -57,3 +58,6 @@ and so on. Of course other combinations are possible, or you can just list files
     python /home/myuser/git/e143-scripts/e143_looper.py -t 0.5 E143-410MHz_-2021.04.30.20.*
 
 will process all files from the last hour, only considering their first 500 ms worth of data.
+
+#### Structure of ROOT files
+Unlike the other script, the ROOT files created by this script does not contain a tree with time data, but a 1D-histogram that already contains the spectrum data.

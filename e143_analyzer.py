@@ -13,7 +13,7 @@ import datetime
 from iqtools import *
 
 
-def process_loop(filenames_list, analysis_time):
+def process_loop(filenames_list, analysis_time, result_filename):
     """
     main processing loop
     """
@@ -33,7 +33,6 @@ def process_loop(filenames_list, analysis_time):
             ff, pp, _ = iq.get_fft()
             pp += pp
         print('Plotting into a png file...')
-        result_filename = datetime.datetime.now().strftime('%Y.%m.%d.%H.%M.%S')
         plot_spectrum(ff, pp, cen=iq.center,
                       filename=result_filename, dbm=True, title=result_filename)
         print('Creating a root file...')
@@ -49,11 +48,15 @@ def main():
     scriptname = 'e143_analyzer'
     __version__ = 'v0.0.1'
 
+    default_outfilename = datetime.datetime.now().strftime('%Y.%m.%d.%H.%M.%S')
+
     parser = argparse.ArgumentParser()
     parser.add_argument('filenames', type=str, nargs='+',
                         help='Filenames to be processed.')
     parser.add_argument('-t', '--time', nargs='?', type=str, default='1',
                         help='Analysis time from the begining.')
+    parser.add_argument('-o', '--outfile', nargs='?', type=str, default=default_outfilename,
+                        help='Name of the output file.')
 
     args = parser.parse_args()
 
@@ -66,7 +69,7 @@ def main():
     except ValueError:
         print('Please provide a number in seconds, like 0.3 or 2. Aborting...')
 
-    process_loop(filenames_list, analysis_time)
+    process_loop(filenames_list, analysis_time, args.outfile)
 
 
 # ------------------------

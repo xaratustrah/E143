@@ -128,6 +128,7 @@ def main():
     __version__ = 'v0.0.1'
 
     default_logfilename = datetime.datetime.now().strftime('%Y.%m.%d.%H.%M.%S') + '.txt'
+
     parser = argparse.ArgumentParser()
     parser.add_argument('monitor_directory', type=str,
                         help='Name of the directory to monitor for files. Use full paths.')
