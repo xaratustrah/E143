@@ -46,11 +46,13 @@ def process_each(filename):
     iq.read_samples(1)
     lframes = 1024
     nframes = int(iq.nsamples_total / lframes)
+    print('Plotting into a png file...')
     iq.read(nframes=nframes, lframes=lframes)
     iq.method = 'mtm'
     xx, yy, zz = iq.get_spectrogram(nframes=nframes, lframes=lframes)
     plot_spectrogram(xx, yy, zz, cen=iq.center, filename=filename)
 
+    print('Creating a root file...')
     with uproot3.recreate(filename + '.root') as f:
         f['info_tree'] = uproot3.newtree(
             {'sampling_freq': uproot3.newbranch(np.int32, title='Sampling frequency')})
