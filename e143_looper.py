@@ -50,7 +50,8 @@ def process_each(filename):
     iq.read(nframes=nframes, lframes=lframes)
     iq.method = 'mtm'
     xx, yy, zz = iq.get_spectrogram(nframes=nframes, lframes=lframes)
-    plot_spectrogram(xx, yy, zz, cen=iq.center, filename=filename)
+    plot_spectrogram(xx, yy, zz, cen=iq.center,
+                     filename=filename, title=iq.file_basename)
 
     print('Creating a root file...')
     with uproot3.recreate(filename + '.root') as f:
