@@ -53,15 +53,8 @@ def process_each(filename):
     xx, yy, zz = iq.get_spectrogram(nframes=nframes, lframes=lframes)
     plot_spectrogram(xx, yy, zz, cen=iq.center,
                      filename=filename, title=iq.file_basename)
-
     print('Creating a root file...')
-    with uproot3.recreate(filename + '.root') as f:
-        f['info_tree'] = uproot3.newtree(
-            {'sampling_freq': uproot3.newbranch(np.int32, title='Sampling frequency')})
-        f['data_tree'] = uproot3.newtree(
-            {'power': uproot3.newbranch(np.float64, title='Time domain signal power')})
-        f['info_tree'].extend({'sampling_freq': np.array([int(iq.fs)])})
-        f['data_tree'].extend({'power': np.abs(iq.data_array)**2})
+    write_timedata_to_root(iq, filename)
 
 
 def copy_files_to_wwwpath(filename, wwwpath):
@@ -110,6 +103,7 @@ def finished_copying(filename):
         s1 = os.path.getsize(filename)
         time.sleep(2)
         s2 = os.path.getsize(filename)
+        print(s1, s2)
         if s1 == s2:
             is_finished = True
         else:
@@ -169,6 +163,8 @@ def main():
             # Make sure there is a trailing slash at the end of the path
             monitor_directory = os.path.join(args.monitor_directory, '')
             wwwpath = os.path.join(args.wwwpath, '')
+
+            # start looping process
             process_loop(monitor_directory, wwwpath, args.logfile)
             time.sleep(SLEEP)
             print('I am waiting for new files...')
