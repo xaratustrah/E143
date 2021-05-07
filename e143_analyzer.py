@@ -13,7 +13,12 @@ import datetime
 from iqtools import *
 
 
-def process_loop(filenames_list, analysis_time, result_filename):
+LFRAMES = 1024
+SPAN = None
+# SPAN = 5000
+
+
+def process_loop(filenames_list, analysis_time, skip_time, result_filename):
     """
     main processing loop
     """
@@ -24,18 +29,19 @@ def process_loop(filenames_list, analysis_time, result_filename):
             print('Processing ', filename)
             iq = get_iq_object(filename)
             iq.read_samples(1)
-            lframes = 1024
+            lframes = LFRAMES
             nframes = int(analysis_time * iq.fs / lframes)
-            if nframes >= iq.nsamples_total:
+            sframes = int(skip_time * iq.fs / lframes)
+            if nframes >= iq.nsamples_total or sframes >= iq.nsamples_total:
                 print(
-                    "The chosen analysis time is larger than this file's total length. Aborting...")
+                    "The chosen analysis or skip time is larger than this file's total length. Aborting...")
                 sys.exit()
-            iq.read(nframes=nframes, lframes=lframes)
+            iq.read(nframes=nframes, lframes=lframes, sframes=sframes)
             iq.method = 'mtm'
             ff, pp, _ = iq.get_fft()
             pp += pp
         print('Plotting into a png file...')
-        plot_spectrum(ff, pp, cen=iq.center,
+        plot_spectrum(ff, pp, cen=iq.center, span=SPAN,
                       filename=result_filename, dbm=True, title=result_filename)
         print('Creating a root file...')
         write_spectrum_to_root(ff, pp, filename=result_filename,
@@ -57,6 +63,8 @@ def main():
                         help='Filenames to be processed.')
     parser.add_argument('-t', '--time', nargs='?', type=str, default='1',
                         help='Analysis time from the begining.')
+    parser.add_argument('-s', '--skip', nargs='?', type=str, default='0',
+                        help='Start of analysis.')
     parser.add_argument('-o', '--outfile', nargs='?', type=str, default=default_outfilename,
                         help='Name of the output file.')
 
@@ -68,10 +76,12 @@ def main():
     filenames_list = [s for s in args.filenames if s.lower().endswith('tiq')]
     try:
         analysis_time = float(args.time)
+        skip_time = float(args.skip)
     except ValueError:
         print('Please provide a number in seconds, like 0.3 or 2. Aborting...')
+        sys.exit()
 
-    process_loop(filenames_list, analysis_time, args.outfile)
+    process_loop(filenames_list, analysis_time, skip_time, args.outfile)
 
 
 # ------------------------
