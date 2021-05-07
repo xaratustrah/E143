@@ -18,6 +18,8 @@ def process_loop(filenames_list, analysis_time, result_filename):
     main processing loop
     """
     try:
+        ff = np.array([])
+        pp = np.array([])
         for filename in filenames_list:
             print('Processing ', filename)
             iq = get_iq_object(filename)
