@@ -38,8 +38,8 @@ def process_loop(filenames_list, analysis_time, skip_time, result_filename):
                 sys.exit()
             iq.read(nframes=nframes, lframes=lframes, sframes=sframes)
             iq.method = 'mtm'
-            ff, pp, _ = iq.get_fft()
-            pp += pp
+            ff, p, _ = iq.get_fft()
+            pp = p if pp.size == 0 else pp + p
         print('Plotting into a png file...')
         plot_spectrum(ff, pp, cen=iq.center, span=SPAN,
                       filename=result_filename, dbm=True, title=result_filename)
