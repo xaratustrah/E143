@@ -11,7 +11,7 @@ import sys
 import argparse
 import datetime
 from iqtools import *
-
+from ROOT import TFile
 
 LFRAMES = 1024
 result_filename = 'blah'
@@ -42,6 +42,12 @@ def process_loop(filenames_list):
     plot_spectrogram(xx, yy, np.abs(np.fft.fftshift(zz, axes=1)), filename=result_filename, cen=iq.center,
                      dbm=False, title=result_filename)
 
+    # write a histogram to a file
+    print('Writing histogram into a root file...')
+    h = get_root_th2d(xx, yy, np.abs(np.fft.fftshift(zz, axes=1)))
+    ff = TFile(result_filename + '.root', 'RECREATE')
+    h.Write()
+    ff.Close()
     inv_zz = get_inv_cplx_spectrogram(zz, lframes=lframes, nframes=nframes)
     print('writing signal as binary')
     write_signal_to_bin(inv_zz, result_filename, fs=iq.fs,
