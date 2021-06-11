@@ -31,5 +31,5 @@ try:
         write = csv.writer(f, delimiter='|')
         write.writerow(['#filename', 'timestamp'])
         write.writerows(timestamps)
-    except:
-        print('Directory date format not matching.')
+except:
+    print('Directory date format not matching.')
