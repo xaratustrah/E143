@@ -54,7 +54,7 @@ def process_each(filename):
     plot_spectrogram(xx, yy, zz, cen=iq.center,
                      filename=filename, title=iq.file_basename)
     print('Creating a root file...')
-    write_timedata_to_root(iq, filename)
+    write_timedata_to_root(iq)
 
 
 def copy_files_to_wwwpath(filename, wwwpath):
