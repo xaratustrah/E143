@@ -65,7 +65,7 @@ def copy_files_to_wwwpath(filename, wwwpath):
     filename_wo_ext = os.path.splitext(filename)[0]
     shutil.copy(filename, wwwpath)
     shutil.copy(filename_wo_ext + '.root', wwwpath)
-    shutil.copy(filename + '.png', wwwpath)
+    shutil.copy(filename_wo_ext + '.png', wwwpath)
 
 
 def put_into_logfile(file, logfilename):
