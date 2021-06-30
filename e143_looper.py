@@ -52,7 +52,7 @@ def process_each(filename):
     iq.method = 'mtm'
     xx, yy, zz = iq.get_spectrogram(nframes=nframes, lframes=lframes)
     plot_spectrogram(xx, yy, zz, cen=iq.center,
-                     filename=iq.file_basename, title=iq.file_basename)
+                     filename=filename, title=iq.file_basename)
     print('Creating a root file...')
     write_timedata_to_root(iq)
 
